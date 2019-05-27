@@ -7,4 +7,4 @@
                 (if (close-enough? guess next)
                     next
                     (try next))))
-        (try first-guess)))s
+        (try first-guess)))
