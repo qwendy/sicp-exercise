@@ -13,13 +13,21 @@
                 ((eq? name 'deposite) deposite)
                 (else (error "unknown request" name))))
 
-    (define (name parameters)
-        body)
+    (define error-count 0)
+
+    (define (call-the-cops)
+        (if (eq? error-count 7)
+            (begin  (set! error-count (+ error-count 1))
+                    (error 'call-the-cops))
+            (begin  (set! error-count (+ error-count 1))
+                    (error 'password-error))))
+
 
     (lambda (secret name)
         (if (eq? secret password)
-            (dispatch name)
-            (error "password error" secret)))
+            (begin  (set! error-count 0)
+                    (dispatch name))
+            (call-the-cops)))
 
 )
 
@@ -27,4 +35,4 @@
 
 ((acc 'secret-password 'withdraw) 40)
 
-((acc 'some-other-password 'deposit) 50)
+((acc 'some-other-password 'deposite) 50)
